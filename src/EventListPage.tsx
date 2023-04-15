@@ -14,6 +14,7 @@ export function EventListPage() {
     <Box margin={5}>
       {events.map((event) => (
         <Paper
+          key={event.title}
           elevation={24}
           style={{ margin: 15, padding: 10, cursor: "pointer" }}
           onClick={() => setSelectedEvent(event)}
