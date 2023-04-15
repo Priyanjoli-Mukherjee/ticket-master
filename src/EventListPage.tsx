@@ -1,5 +1,5 @@
 import { Box, Paper, Typography } from "@mui/material";
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { getEventData } from "./getEventData";
 import { Event } from "./Event";
 import { EventDialog } from "./EventDialog";
@@ -10,6 +10,13 @@ export function EventListPage() {
   const [numTickets, setNumTickets] = useState<number>();
 
   const events = useMemo(() => getEventData(), []);
+
+  const onCloseDialog = useCallback(() => setSelectedEvent(undefined), []);
+  const onCloseDrawer = useCallback(() => {
+    setSelectedEvent(undefined);
+    setNumTickets(undefined);
+  }, []);
+
   return (
     <Box margin={5} display="flex" flexDirection="column" alignItems="center">
       <Typography variant="h3">Welcome to Ticketmaster!</Typography>
@@ -36,7 +43,7 @@ export function EventListPage() {
       {selectedEvent && !numTickets && (
         <EventDialog
           event={selectedEvent}
-          onCancel={() => setSelectedEvent(undefined)}
+          onCancel={onCloseDialog}
           onSubmit={setNumTickets}
         />
       )}
@@ -44,10 +51,7 @@ export function EventListPage() {
         <CheckOutDrawer
           event={selectedEvent}
           numTickets={numTickets}
-          onCancel={() => {
-            setSelectedEvent(undefined);
-            setNumTickets(undefined);
-          }}
+          onCancel={onCloseDrawer}
         />
       )}
     </Box>

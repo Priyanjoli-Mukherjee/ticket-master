@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useCallback, useState } from "react";
 import { Event } from "./Event";
 import {
   Box,
@@ -19,6 +19,18 @@ type Props = {
 
 export function EventDialog(props: Props) {
   const [numTickets, setNumTickets] = useState(1);
+
+  const onChange = useCallback(
+    (evt: ChangeEvent<HTMLInputElement>) =>
+      setNumTickets(parseInt(evt.target.value)),
+    []
+  );
+
+  const onSubmit = useCallback(
+    () => props.onSubmit(numTickets),
+    [numTickets, props.onSubmit]
+  );
+
   return (
     <Dialog open fullWidth maxWidth="xs">
       <DialogTitle>Purchase Tickets</DialogTitle>
@@ -34,9 +46,7 @@ export function EventDialog(props: Props) {
           </Box>
           <TextField
             value={numTickets}
-            onChange={(evt: ChangeEvent<HTMLInputElement>) =>
-              setNumTickets(parseInt(evt.target.value))
-            }
+            onChange={onChange}
             type="number"
             style={{ width: 75, height: 75 }}
           />
@@ -46,7 +56,7 @@ export function EventDialog(props: Props) {
         <Button variant="outlined" onClick={props.onCancel}>
           Cancel
         </Button>
-        <Button variant="contained" onClick={() => props.onSubmit(numTickets)}>
+        <Button variant="contained" onClick={onSubmit}>
           Submit
         </Button>
       </DialogActions>
