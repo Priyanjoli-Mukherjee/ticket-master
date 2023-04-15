@@ -3,6 +3,7 @@ import React, { useMemo, useState } from "react";
 import { getEventData } from "./getEventData";
 import { Event } from "./Event";
 import { EventDialog } from "./EventDialog";
+import { CheckOutDrawer } from "./CheckOutDrawer";
 
 export function EventListPage() {
   const [selectedEvent, setSelectedEvent] = useState<Event>();
@@ -32,6 +33,16 @@ export function EventListPage() {
           event={selectedEvent}
           onCancel={() => setSelectedEvent(undefined)}
           onSubmit={setNumTickets}
+        />
+      )}
+      {selectedEvent && numTickets && (
+        <CheckOutDrawer
+          event={selectedEvent}
+          numTickets={numTickets}
+          onCancel={() => {
+            setSelectedEvent(undefined);
+            setNumTickets(undefined);
+          }}
         />
       )}
     </Box>
