@@ -11,7 +11,11 @@ export function EventListPage() {
 
   const events = useMemo(() => getEventData(), []);
   return (
-    <Box margin={5}>
+    <Box margin={5} display="flex" flexDirection="column" alignItems="center">
+      <Typography variant="h3">Welcome to Ticketmaster!</Typography>
+      <Typography variant="h4">
+        Please select an event below to purchase tickets.
+      </Typography>
       {events.map((event) => (
         <Paper
           key={event.title}
