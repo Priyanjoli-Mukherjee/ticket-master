@@ -1,3 +1,6 @@
 # Running TicketMaster
 
-To run the app, simply execute `npm start` in the terminal.
+To run the app, simply clone the repo execute the following commands:
+
+### `npm install`
+### `npm start`
