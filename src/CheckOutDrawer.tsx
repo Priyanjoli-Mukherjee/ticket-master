@@ -1,6 +1,6 @@
 import React from "react";
 import { Event } from "./Event";
-import { Box, Drawer, Typography } from "@mui/material";
+import { Box, Button, Drawer, Typography } from "@mui/material";
 
 type Props = {
   event: Event;
@@ -11,7 +11,13 @@ type Props = {
 export function CheckOutDrawer(props: Props) {
   return (
     <Drawer open anchor="right" onClose={props.onCancel}>
-      <Box width={400} padding={5}>
+      <Box
+        width={400}
+        height="100%"
+        padding={5}
+        display="flex"
+        flexDirection="column"
+      >
         <Box display="flex" justifyContent="space-between" marginBottom={4}>
           <Typography variant="h5">Total</Typography>
           <Typography variant="h5">
@@ -29,6 +35,16 @@ export function CheckOutDrawer(props: Props) {
           <Typography variant="h6">
             ${props.event.price} &times; {props.numTickets}
           </Typography>
+        </Box>
+        <Box
+          flexGrow={1}
+          display="flex"
+          alignItems="flex-end"
+          justifyContent="center"
+        >
+          <Button variant="contained" onClick={props.onCancel}>
+            Place Order
+          </Button>
         </Box>
       </Box>
     </Drawer>
