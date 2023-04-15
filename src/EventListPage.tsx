@@ -24,7 +24,7 @@ export function EventListPage() {
             <Typography variant="h5">{`$${event.price}`}</Typography>
           </Box>
           <Typography variant="h6">{event.artist}</Typography>
-          <Typography variant="body1" style={{ fontStyle: "italic" }}>
+          <Typography variant="body1" style={{ fontStyle: "oblique" }}>
             {event.description}
           </Typography>
         </Paper>
